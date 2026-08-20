@@ -1,0 +1,112 @@
+Objetivo del dispositivo:
+El SW2 opera como Switch de Acceso en el Edificio 1 y asume el rol de puente raíz principal (STP Primario) para las VLANs 300, 500 y 999. Asegura los puertos de acceso de los usuarios mediante Port-Security y BPDU Guard, y mantiene conectividad redundante con SW1 vía EtherChannel.
+
+Proceso de configuración:
+! 3.1 Configuración inicial
+ena
+conf t
+hostname SW2
+banner motd #SOLO PERSONAL AUTORIZADO Kelvin De Jesus Luna 2025-2144#
+
+! 3.2 Base de datos de VLANs
+vlan 300
+ name DOCENTES_ESTUDIANTES
+vlan 500
+ name ACADEMICOS
+vlan 999
+ name ADMIN_NATIVA
+exit
+
+! 3.3 Hardening y asignación de puertos de acceso
+! Puertos para VLAN 300
+int fa0/5
+ sw mo acc
+ sw acc vlan 300
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+int fa0/6
+ sw mo acc
+ sw acc vlan 300
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+int fa0/20
+ sw mo acc
+ sw acc vlan 300
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+
+! Puertos para VLAN 500
+int fa0/9
+ sw mo acc
+ sw acc vlan 500
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+int fa0/17
+ sw mo acc
+ sw acc vlan 500
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+
+! 3.4 EtherChannel LACP hacia SW1
+int port-channel 1
+ sw mo tru
+ sw tru native vlan 999
+ sw tru allowed vlan 300,500,999
+ sw nonegotiate
+ no sh
+exit
+int ra fa0/23-24
+ sw mo tru
+ sw tru native vlan 999
+ sw tru allowed vlan 300,500,999
+ sw nonegotiate
+ channel-group 1 mode active
+exit
+
+! 3.5 Troncal hacia Router R2
+int gig0/1
+ sw mo tru
+ sw tru native vlan 999
+ sw tru allowed vlan 300,500,999
+ sw nonegotiate
+ no sh
+exit
+
+! 3.6 Spanning Tree raíz principal y guardado
+spanning-tree vlan 300,500,999 root primary
+end
+wr
+
+Verificaciones realizadas:
+SW2# show etherchannel summary
+SW2# show vlan brief
