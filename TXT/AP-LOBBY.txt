@@ -1,0 +1,16 @@
+Objetivo del dispositivo:
+Proporcionar cobertura inalámbrica física en el área del Lobby (Edificio Corporativo/Campus). Este dispositivo funciona como Lightweight Access Point (LAP) y recibe toda su configuración de red y SSIDs desde el Wireless LAN Controller (WLC).
+
+Proceso de configuración:
+1. Conexión física:
+   - Puerto Gigabit del AP conectado al puerto de acceso designado en SW4.
+   - Conexión del adaptador de corriente (Power Adapter) en la pestaña "Physical" de Packet Tracer.
+
+2. Obtención de IP:
+   - El AP está configurado para recibir IP mediante DHCP desde el R3-DHCP en la VLAN de gestión inalámbrica.
+   - El WLC lo detecta automáticamente una vez que el AP obtiene su dirección IP.
+
+Verificaciones realizadas:
+- Verificación visual: Link verde entre AP-Lobby y SW4.
+- Verificación en WLC: El AP aparece con el estado "Joined" en la pestaña "Wireless" del WLC.
+- SSID emitidos: "Corporativo" y "Campus" visibles en los dispositivos finales del área.
