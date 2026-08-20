@@ -1,0 +1,15 @@
+Objetivo del dispositivo:
+Equipo final ubicado en el Edificio 2, asignado a la VLAN 3 (EMPLEADOS), utilizado para comprobar las políticas del switch SW3 y la conectividad a los servidores.
+
+Proceso de configuración:
+1. Conexión física:
+   - Conectado vía cable UTP directo a uno de los puertos (fa0/4-8) del SW3.
+
+2. Configuración de IP (Pestaña Desktop -> IP Configuration):
+   - Modo: DHCP
+   - Parámetros recibidos del pool "EMPLEADOS" en el router R3-DHCP a través del DHCP Relay (ip helper-address) configurado en el SMC1.
+
+Verificaciones realizadas:
+- "ipconfig" muestra IP en la red 21.44.74.0/27.
+- Navegación web exitosa hacia intranet.itla.local.
+- Configuración exitosa del cliente de correo (Desktop -> Email) apuntando a mail.itla.local.
