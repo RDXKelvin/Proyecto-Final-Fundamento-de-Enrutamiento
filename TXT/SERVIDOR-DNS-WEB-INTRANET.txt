@@ -1,0 +1,25 @@
+Objetivo del dispositivo:
+Proveer el servicio de resolución de nombres de dominio (DNS) para toda la topología y alojar la página web de la Intranet corporativa. Pertenece a la VLAN 2 (SERVIDORES).
+
+Proceso de configuración:
+1. Configuración de IP (Pestaña Desktop -> IP Configuration):
+   - IP Address: 21.44.74.131
+   - Subnet Mask: 255.255.255.128
+   - Default Gateway: 21.44.74.129
+   - DNS Server: 21.44.74.131
+
+2. Configuración Servicio HTTP/HTTPS (Pestaña Services -> HTTP):
+   - HTTP: ON
+   - HTTPS: ON
+   - Modificación del archivo "index.html" para mostrar el mensaje: "Bienvenido a la Intranet de Kelvin De Jesus Luna (2025-2144)".
+
+3. Configuración Servicio DNS (Pestaña Services -> DNS):
+   - DNS Service: ON
+   - Creación de registros (A Record):
+     * Name: intranet.itla.local | Address: 21.44.74.131 -> [Add]
+     * Name: mail.itla.local | Address: 21.44.74.132 -> [Add]
+     * Name: ftp.itla.local | Address: 21.44.74.133 -> [Add]
+
+Verificaciones realizadas:
+- Todos los dispositivos finales resuelven nombres a través de este servidor.
+- Acceso exitoso a http://intranet.itla.local desde el navegador web de PC-ACADEMICO.
