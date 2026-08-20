@@ -1,0 +1,15 @@
+Objetivo del dispositivo:
+Equipo terminal alámbrico asignado al departamento Académico, configurado para obtener sus parámetros de red de forma dinámica y validar las restricciones de seguridad de puerto en el switch correspondiente (SW1/SW2).
+
+Proceso de configuración:
+1. Conexión física:
+   - Conectado vía cable UTP directo al puerto del switch correspondiente a la VLAN 500.
+
+2. Configuración de IP (Pestaña Desktop -> IP Configuration):
+   - Modo: DHCP
+   - El equipo solicita y recibe los parámetros desde el pool "ACADEMICOS" alojado en el R3-DHCP.
+
+Verificaciones realizadas:
+- En Command Prompt: "ipconfig /all" (Verifica IP asignada en el rango 21.44.75.32/27, máscara, Gateway y DNS correctos).
+- Ping exitoso al Default Gateway.
+- Resolución DNS exitosa haciendo ping a intranet.itla.local.
