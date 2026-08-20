@@ -1,0 +1,22 @@
+Objetivo del dispositivo:
+Funcionar como el servidor de correo electrónico corporativo de la infraestructura, proveyendo los servicios SMTP (envío) y POP3 (recepción) para los usuarios internos de las diferentes áreas. Pertenece a la VLAN 2 (SERVIDORES).
+
+Proceso de configuración:
+1. Configuración de IP (Pestaña Desktop -> IP Configuration):
+   - IP Address: 21.44.74.132
+   - Subnet Mask: 255.255.255.128
+   - Default Gateway: 21.44.74.129
+   - DNS Server: 21.44.74.131
+
+2. Configuración del Servicio (Pestaña Services -> Email):
+   - SMTP Service: ON
+   - POP3 Service: ON
+   - Domain Name: itla.local -> Clic en [Set]
+   - Creación de Usuarios:
+     * User: admin / Password: 123 -> [ + ]
+     * User: docente / Password: 123 -> [ + ]
+     * User: empleado / Password: 123 -> [ + ]
+
+Verificaciones realizadas:
+- Prueba de conectividad (Ping) desde PC-TI hacia 21.44.74.132 exitosa.
+- Envío y recepción de un correo de prueba entre PC-EMPLEADO y PC-DOCENTE usando el dominio itla.local.
