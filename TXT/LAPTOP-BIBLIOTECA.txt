@@ -1,0 +1,14 @@
+Objetivo del dispositivo:
+Laptop inalámbrica que valida el acceso exclusivo de la red "Biblioteca", demostrando la funcionalidad de los AP Groups configurados en el WLC.
+
+Proceso de configuración:
+1. Hardware: Módulo WPC300N instalado y activo.
+2. Autenticación:
+   - Conectado al SSID: Biblioteca
+   - Security: WPA2-Personal
+   - Passphrase: Cisco123
+   - IP Configuration en modo DHCP para recibir direccionamiento de la VLAN WIFI.
+
+Verificaciones realizadas:
+- Conexión exitosa únicamente al AP de la Biblioteca.
+- Ping al Default Gateway (21.44.72.1) exitoso.
