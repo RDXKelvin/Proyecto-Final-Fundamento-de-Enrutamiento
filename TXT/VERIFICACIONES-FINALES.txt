@@ -1,0 +1,27 @@
+Objetivo del documento:
+Centralizar y resumir todas las pruebas de conectividad de extremo a extremo exigidas en la rúbrica del proyecto final, garantizando que el enrutamiento (HSRP, Estático, Inter-VLAN), la conmutación (EtherChannel, STP, Port-Security) y los servicios (DHCP, WLC, DNS, FTP, Web, Mail) funcionan correctamente.
+
+Pruebas ejecutadas:
+
+1. Pruebas de DHCP e IP Helper:
+   - Todas las PCs (VLAN 300, 500, 3, 4, 5) y Laptops (VLAN 6) reciben IP dinámica de manera exitosa desde el router núcleo R3-DHCP.
+
+2. Pruebas de Enrutamiento y Conectividad End-to-End:
+   - PC-ACADEMICO (Edificio 1) hace ping exitoso a PC-FINANZAS (Edificio 2).
+   - PC-DOCENTE hace ping exitoso a LAPTOP-CAMPUS.
+   - R1 y R2 pueden hacer ping al ISP simulando salida a Internet.
+
+3. Pruebas de Alta Disponibilidad (HSRP):
+   - Al apagar la interfaz gig0/1 de R2 (Activo), el tráfico fluye automáticamente por R1 (Standby) sin perder conexión en las VLANs 300 y 500.
+
+4. Pruebas de Servicios de Servidor:
+   - DNS y WEB: "intranet.itla.local" abre correctamente en los navegadores de las PCs.
+   - FTP: Acceso remoto verificado con el usuario "admin" desde PC-TI.
+   - EMAIL: Correos de prueba recibidos exitosamente en las bandejas de entrada de los usuarios.
+
+5. Pruebas de Seguridad:
+   - Acceso SSH exitoso hacia SMC1 desde un equipo administrativo.
+   - Port-Security validado (puertos configuran "violation shutdown" en caso de sobrepasar 2 direcciones MAC).
+
+Resultado final del Proyecto: 100% Funcional.
+Autor: Kelvin De Jesus Luna - Matrícula 2025-2144.
