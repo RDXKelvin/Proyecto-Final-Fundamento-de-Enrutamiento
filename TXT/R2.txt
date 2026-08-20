@@ -1,0 +1,54 @@
+Objetivo del dispositivo:
+El Router R2 funciona como el Router de Distribución para el Edificio 1 en estado HSRP Activo. Posee mayor prioridad (120) que el R1 para actuar como el gateway principal de las VLANs de ese edificio. También utiliza subinterfaces para el enrutamiento y se conecta directamente al R3-DHCP.
+
+Proceso de configuración:
+ena
+conf t
+hostname R2
+banner motd #SOLO PERSONAL AUTORIZADO Kelvin De Jesus Luna 2025-2144#
+
+! Enlace punto a punto hacia R3-DHCP
+int gig0/1/0
+ ip add 21.44.75.106 255.255.255.252
+ no sh
+exit
+
+! Troncal física hacia SW2
+int gig0/1
+ no ip address
+ no sh
+exit
+
+! Subinterfaces dot1Q con redundancia HSRP Activa (Prioridad 120)
+int gig0/1.300
+ encapsulation dot1Q 300
+ ip add 21.44.64.3 255.255.248.0
+ standby 30 ip 21.44.64.1
+ standby 30 priority 120
+ standby 30 preempt
+ ip helper-address 21.44.75.105
+exit
+
+int gig0/1.500
+ encapsulation dot1Q 500
+ ip add 21.44.75.35 255.255.255.224
+ standby 50 ip 21.44.75.33
+ standby 50 priority 120
+ standby 50 preempt
+ ip helper-address 21.44.75.105
+exit
+
+int gig0/1.999
+ encapsulation dot1Q 999 native
+ no ip address
+exit
+
+! Ruta por defecto hacia R3-DHCP y guardado
+ip route 0.0.0.0 0.0.0.0 21.44.75.105
+end
+wr
+
+Verificaciones realizadas:
+R2# show standby brief
+R2# show ip route
+R2# show ip interface brief
