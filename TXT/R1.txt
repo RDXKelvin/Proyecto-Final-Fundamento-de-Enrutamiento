@@ -1,0 +1,55 @@
+Objetivo del dispositivo:
+El Router R1 actúa como el Router de Distribución para el Edificio 1. Está configurado con redundancia de primer salto (HSRP) en estado Standby para las VLANs correspondientes y proporciona enrutamiento Inter-VLAN a través de subinterfaces (Router-on-a-Stick). Se comunica con el router central (R3-DHCP) mediante un enlace punto a punto y una ruta por defecto.
+
+Proceso de configuración:
+! 6.1 Configuración inicial
+ena
+conf t
+hostname R1
+banner motd #SOLO PERSONAL AUTORIZADO Kelvin De Jesus Luna 2025-2144#
+
+! 6.2 Enlace punto a punto hacia R3-DHCP
+int gig0/0/0
+ ip add 21.44.75.102 255.255.255.252
+ no sh
+exit
+
+! 6.3 Troncal física hacia SW1
+int gig0/0
+ no ip address
+ no sh
+exit
+
+! 6.4 Subinterfaces dot1Q con redundancia HSRP en Standby (Prioridad 110)
+int gig0/0.300
+ encapsulation dot1Q 300
+ ip add 21.44.64.2 255.255.248.0
+ standby 30 ip 21.44.64.1
+ standby 30 priority 110
+ standby 30 preempt
+ ip helper-address 21.44.75.101
+exit
+
+int gig0/0.500
+ encapsulation dot1Q 500
+ ip add 21.44.75.34 255.255.255.224
+ standby 50 ip 21.44.75.33
+ standby 50 priority 110
+ standby 50 preempt
+ ip helper-address 21.44.75.101
+exit
+
+int gig0/0.999
+ encapsulation dot1Q 999 native
+ no ip address
+exit
+
+! 6.5 Ruta estática por defecto y guardado
+ip route 0.0.0.0 0.0.0.0 21.44.75.101
+end
+wr
+
+Verificaciones realizadas:
+R1# show standby brief
+R1# show ip interface brief
+R1# show ip route
