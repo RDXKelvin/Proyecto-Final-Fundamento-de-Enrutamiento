@@ -1,0 +1,14 @@
+Objetivo del dispositivo:
+Máquina de administración para el personal de Tecnología de la Información. Utilizada para gestionar los equipos de red mediante SSH y transferir archivos por FTP. Pertenece a la VLAN 5.
+
+Proceso de configuración:
+1. Conexión física:
+   - Conectado vía cable UTP a la interfaz del SW3 asignada a la VLAN 5.
+
+2. Configuración de IP:
+   - Modo: DHCP. 
+   - IP recibida del pool "TI" (red 21.44.75.64/27).
+
+Verificaciones realizadas:
+- Acceso SSH exitoso hacia el SMC1 utilizando las credenciales administrativas. En el Command Prompt: "ssh -l Admin 21.44.75.98"
+- Conexión al servidor FTP y listado de directorios correcto.
