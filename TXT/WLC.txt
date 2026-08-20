@@ -1,0 +1,55 @@
+Objetivo del dispositivo:
+El Wireless LAN Controller (WLC) gestiona y provee acceso inalámbrico centralizado a través de los Access Points (AP). Administra los SSIDs de la "Biblioteca", "Campus" y "Corporativo", configura las políticas de seguridad WPA2 y enruta los dispositivos a sus respectivos grupos y VLANs.
+
+Proceso de configuración:
+1. Acceso Inicial Web:
+   - Conectar un equipo al segmento wireless y abrir: http://21.44.72.2
+
+2. Credenciales por defecto:
+   - User: Admin
+   - Password: Cisco123 / Cisco123
+
+3. Asistente de Configuración Inicial (Setup Wizard):
+   - System Name: WLC
+   - Management IP Address: 21.44.72.2
+   - Subnet Mask: 255.255.254.0
+   - Default Gateway: 21.44.72.1
+   - VLAN ID: 0 (o la VLAN de gestión aplicada)
+   - Clic en [Next]
+
+4. Configuración de Red Inalámbrica Base:
+   - Network Name (SSID): Corporativo
+   - Passphrase: Cisco123 / Cisco123
+   - Clic en [Next] -> [Apply] para reiniciar el controlador con los cambios.
+
+5. Acceso Seguro HTTPS:
+   - Reingresar mediante: https://21.44.72.2
+   - User: Admin | Password: Cisco123
+
+6. Creación de Redes Inalámbricas (WLANs):
+   - Ir a la pestaña "WLANs" -> Crear nueva (Create New) -> Clic en "Go":
+     * WLAN 1:
+       - Profile Name: Biblioteca
+       - SSID: Biblioteca
+       - Status: Enabled
+       - Security: WPA+WPA2 -> PSK: Cisco123 -> [Apply]
+     * WLAN 2:
+       - Profile Name: Campus
+       - SSID: Campus
+       - Status: Enabled
+       - Security: WPA+WPA2 -> PSK: Cisco123 -> [Apply]
+
+7. Configuración de Grupos de AP (AP Groups):
+   - Ir a "Advanced" -> "AP Groups" -> Crear "New Group":
+     * Grupo Lobby: Asignar WLANs "Corporativo" y "Campus".
+     * Grupo Biblioteca: Asignar WLAN "Biblioteca".
+   - Mapear cada Access Point físico al grupo correspondiente.
+
+8. Asignación del Servidor DHCP Central en WLC:
+   - Ir a "Controller" -> "Interfaces" -> "Management".
+   - Primary DHCP Server: 21.44.75.97
+   - Clic en [Apply] y guardar en "Save Configuration".
+
+Verificaciones realizadas:
+- Pruebas de conectividad desde las laptops inalámbricas a los diferentes SSID.
+- Verificación en la pestaña "Monitor" del WLC para confirmar los Access Points asociados.
