@@ -1,0 +1,66 @@
+Objetivo del dispositivo:
+El SW4 actúa como el Switch de Acceso exclusivo para la infraestructura inalámbrica (Puntos de Acceso / WIFI). Gestiona las conexiones físicas de los APs enviando el tráfico a través de la VLAN 6 y se comunica mediante un puerto troncal con el SMC1.
+
+Proceso de configuración:
+! 5.1 Parámetros iniciales y VLANs
+ena
+conf t
+hostname SW4
+banner motd #SOLO PERSONAL AUTORIZADO Kelvin De Jesus Luna 2025-2144#
+vlan 6
+ name WIFI
+vlan 7
+ name NATIVA
+exit
+
+! 5.2 Troncal hacia SMC1
+int gig0/1
+ sw mo tru
+ sw tru native vlan 7
+ sw tru allowed vlan 6,7
+ sw nonegotiate
+ no sh
+exit
+
+! 5.3 Puertos de acceso protegidos para Access Points y terminales
+int fa0/2
+ sw mo acc
+ sw acc vlan 6
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+int fa0/3
+ sw mo acc
+ sw acc vlan 6
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ sw port-security
+ sw port-security maximum 2
+ sw port-security violation shutdown
+ sw port-security mac-address sticky
+ no sh
+exit
+int gig0/2
+ sw mo acc
+ sw acc vlan 6
+ spanning-tree portfast
+ no sh
+exit
+int fa0/4
+ sw mo acc
+ sw acc vlan 6
+ spanning-tree portfast
+ no sh
+exit
+
+! 5.4 Guardado
+end
+wr
+
+Verificaciones realizadas:
+SW4# show vlan brief
