@@ -1,0 +1,22 @@
+Objetivo del dispositivo:
+Servidor dedicado para el almacenamiento y transferencia de archivos (FTP) en la red corporativa. Pertenece a la VLAN 2 (SERVIDORES).
+
+Proceso de configuración:
+1. Configuración de IP (Pestaña Desktop -> IP Configuration):
+   - IP Address: 21.44.74.133
+   - Subnet Mask: 255.255.255.128
+   - Default Gateway: 21.44.74.129
+   - DNS Server: 21.44.74.131
+
+2. Configuración del Servicio (Pestaña Services -> FTP):
+   - FTP Service: ON
+   - Creación de cuenta de acceso:
+     * Username: admin
+     * Password: Cisco123
+     * Permisos: Read, Write, Delete, Rename, List -> marcados todos.
+     * Clic en [ + Add ]
+
+Verificaciones realizadas:
+- Conexión exitosa desde el Command Prompt de PC-TI usando el comando: "ftp ftp.itla.local".
+- Autenticación correcta con las credenciales "admin" / "Cisco123".
+- Uso del comando "dir" verificando el listado de archivos en el servidor.
