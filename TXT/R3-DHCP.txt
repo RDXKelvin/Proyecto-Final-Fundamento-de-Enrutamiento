@@ -1,0 +1,89 @@
+Objetivo del dispositivo:
+Actúa como el Router Central y de Servicios DHCP de la red. Administra la asignación dinámica de direcciones IP mediante la configuración de los diferentes pools para todas las VLANs. Funciona como el núcleo de enrutamiento estático hacia los edificios 1 y 2, y dirige el tráfico hacia el proveedor de servicios (ISP).
+
+Proceso de configuración:
+ena
+conf t
+hostname R3DHCP
+banner motd #SOLO PERSONAL AUTORIZADO Kelvin De Jesus Luna 2025-2144#
+
+! Enlaces punto a punto L3 hacia R1, R2 y SMC1
+int gig0/0/0
+ ip add 21.44.75.101 255.255.255.252
+ no sh
+exit
+int gig0/1/0
+ ip add 21.44.75.105 255.255.255.252
+ no sh
+exit
+int gig0/2/0
+ ip add 21.44.75.97 255.255.255.252
+ no sh
+exit
+
+! Exclusiones DHCP para Gateways e IPs fijas
+ip dhcp excluded-address 21.44.74.1
+ip dhcp excluded-address 21.44.75.1
+ip dhcp excluded-address 21.44.75.65
+ip dhcp excluded-address 21.44.72.1 21.44.72.2
+ip dhcp excluded-address 21.44.64.1 21.44.64.3
+ip dhcp excluded-address 21.44.75.33 21.44.75.35
+
+! Configuración de Pools DHCP
+ip dhcp pool FINANZAS
+ network 21.44.75.0 255.255.255.224
+ default-router 21.44.75.1
+ dns-server 21.44.74.131
+exit
+
+ip dhcp pool TI
+ network 21.44.75.64 255.255.255.224
+ default-router 21.44.75.65
+ dns-server 21.44.74.131
+exit
+
+ip dhcp pool WIFI
+ network 21.44.72.0 255.255.254.0
+ default-router 21.44.72.1
+ dns-server 21.44.74.131
+exit
+
+ip dhcp pool ACADEMICOS
+ network 21.44.75.32 255.255.255.224
+ default-router 21.44.75.33
+ dns-server 21.44.74.131
+exit
+
+ip dhcp pool DOCENTES_ESTUDIANTES
+ network 21.44.64.0 255.255.248.0
+ default-router 21.44.64.1
+ dns-server 21.44.74.131
+exit
+
+ip dhcp pool EMPLEADOS
+ network 21.44.74.0 255.255.255.224
+ default-router 21.44.74.1
+ dns-server 21.44.74.131
+exit
+
+! Tablas de enrutamiento estático hacia Edificio 2, Edificio 1 y WAN
+ip route 21.44.74.128 255.255.255.128 21.44.75.98
+ip route 21.44.74.0 255.255.255.224 21.44.75.98
+ip route 21.44.75.0 255.255.255.224 21.44.75.98
+ip route 21.44.75.64 255.255.255.224 21.44.75.98
+ip route 21.44.72.0 255.255.254.0 21.44.75.98
+
+ip route 21.44.64.0 255.255.248.0 21.44.75.106
+ip route 21.44.75.32 255.255.255.224 21.44.75.106
+
+ip route 21.44.64.0 255.255.248.0 21.44.75.102 5
+ip route 21.44.75.32 255.255.255.224 21.44.75.102 5
+
+ip route 0.0.0.0 0.0.0.0 209.165.200.226
+
+end
+wr
+
+Verificaciones realizadas:
+R3DHCP# show ip interface brief
+R3DHCP# show ip route
