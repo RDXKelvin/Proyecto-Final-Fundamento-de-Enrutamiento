@@ -1,0 +1,13 @@
+Objetivo del dispositivo:
+Probar el acceso inalámbrico a los recursos de la empresa mediante el SSID "Corporativo", validando la propagación de redes desde el controlador WLC.
+
+Proceso de configuración:
+1. Hardware: Interfaz Wireless WPC300N habilitada.
+2. Configuración de red:
+   - Conexión al SSID "Corporativo".
+   - Clave de seguridad ingresada correctamente.
+   - IP dinámica asignada por R3-DHCP (Segmento WIFI).
+
+Verificaciones realizadas:
+- En Command prompt: "ipconfig" para asegurar que pertenece al mismo segmento lógico que las demás laptops.
+- Envío de un correo de prueba usando el software de "Email" en la pestaña Desktop de la laptop hacia un PC cableado.
