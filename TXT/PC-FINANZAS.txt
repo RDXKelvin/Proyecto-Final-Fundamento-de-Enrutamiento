@@ -1,0 +1,14 @@
+Objetivo del dispositivo:
+Equipo terminal perteneciente al segmento corporativo del departamento de Finanzas. Se utiliza para comprobar el aislamiento o conectividad según las políticas exigidas en la red.
+
+Proceso de configuración:
+1. Conexión física:
+   - Conectado vía cable UTP directo a los puertos del SW3 asignados a la VLAN 4 (FINANZAS).
+
+2. Configuración de red:
+   - Modo: DHCP
+   - IP obtenida desde el pool "FINANZAS" (red 21.44.75.0/27) gracias al ip helper-address del switch Core.
+
+Verificaciones realizadas:
+- Validación de IP, Máscara, Default Gateway y DNS Server mediante "ipconfig /all".
+- Ping exitoso al servidor FTP (21.44.74.133).
