@@ -1,0 +1,16 @@
+Objetivo del dispositivo:
+Proporcionar señal inalámbrica exclusiva para el área de la Biblioteca. Está gestionado de manera centralizada a través del controlador WLC y configurado para emitir el SSID correspondiente a esa zona.
+
+Proceso de configuración:
+1. Conexión física:
+   - Puerto Gigabit del AP conectado al puerto de acceso designado en SW4.
+   - Conexión del adaptador de corriente (Power Adapter) en la pestaña "Physical" de Packet Tracer.
+
+2. Obtención de IP:
+   - El AP está configurado para recibir IP mediante DHCP desde el R3-DHCP en la VLAN de WIFI.
+   - El WLC lo detecta automáticamente una vez que el AP obtiene su dirección IP y es mapeado al "AP Group Biblioteca".
+
+Verificaciones realizadas:
+- Verificación visual: Link verde entre AP-Biblioteca y SW4.
+- Verificación en WLC: El AP aparece en la tabla de puntos de acceso gestionados.
+- SSID emitido: Solo "Biblioteca" es visible en los dispositivos finales ubicados en esta zona de cobertura.
