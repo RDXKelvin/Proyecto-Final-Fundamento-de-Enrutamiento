@@ -1,0 +1,14 @@
+Objetivo del dispositivo:
+Equipo terminal alámbrico asignado a los Docentes/Estudiantes, utilizado para validar el enrutamiento inter-vlan y el funcionamiento del DHCP.
+
+Proceso de configuración:
+1. Conexión física:
+   - Conectado vía cable UTP directo al puerto del switch correspondiente a la VLAN 300.
+
+2. Configuración de IP (Pestaña Desktop -> IP Configuration):
+   - Modo: DHCP
+   - El equipo solicita y recibe los parámetros desde el pool "DOCENTES_ESTUDIANTES" alojado en el R3-DHCP.
+
+Verificaciones realizadas:
+- En Command Prompt: "ipconfig" confirma la obtención de una IP en el segmento 21.44.64.0/21.
+- Conectividad verificada haciendo ping a PC-ACADEMICO (Prueba de Inter-VLAN routing).
