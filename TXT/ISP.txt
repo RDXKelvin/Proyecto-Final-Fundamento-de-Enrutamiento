@@ -1,0 +1,24 @@
+Objetivo del dispositivo:
+El Router ISP simula la conexión hacia Internet del Proveedor de Servicios. Recibe el tráfico desde R3-DHCP mediante una interfaz con dirección IP pública y permite que la red corporativa se conecte al exterior.
+
+Proceso de configuración:
+ena
+conf t
+hostname ISP
+banner motd #SOLO PERSONAL AUTORIZADO Kelvin De Jesus Luna 2025-2144#
+
+! Interfaz WAN hacia R3-DHCP
+interface GigabitEthernet0/0/0
+ ip address 209.165.200.225 255.255.255.252
+ no shutdown
+exit
+
+! Ruta de retorno hacia la red corporativa
+ip route 21.44.0.0 255.255.0.0 209.165.200.226
+end
+wr
+
+Verificaciones realizadas:
+ISP# show ip interface brief
+ISP# show ip route
+ISP# ping 209.165.200.226
