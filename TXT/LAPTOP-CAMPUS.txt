@@ -1,0 +1,17 @@
+Objetivo del dispositivo:
+Dispositivo móvil para verificar la conectividad inalámbrica (WLAN) en la red "Campus" provista por los Access Points y gestionada por el WLC.
+
+Proceso de configuración:
+1. Configuración de Hardware:
+   - Apagar la laptop, remover la tarjeta Ethernet genérica (FastEthernet) e instalar el módulo WPC300N (Wireless).
+   - Encender la laptop.
+
+2. Conexión a la red WIFI (Desktop -> PC Wireless):
+   - Pestaña Connect -> Refresh.
+   - Seleccionar el SSID "Campus" -> Clic en Connect.
+   - Ingresar la contraseña WPA2-PSK configurada en el WLC (Cisco123).
+   - El equipo negocia y obtiene una IP mediante DHCP del pool "WIFI" (VLAN 6).
+
+Verificaciones realizadas:
+- Pestaña "Link Information" muestra "Successfully connected to an access point".
+- Ping exitoso al DNS Server y navegación web hacia la intranet.
